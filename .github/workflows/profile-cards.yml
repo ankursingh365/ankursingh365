@@ -24,13 +24,15 @@ jobs:
         run: mkdir -p profile
 
       # ---------- Stats card (dark + light) ----------
+      # Needs a personal access token saved as the repo secret PAT:
+      # the built-in GITHUB_TOKEN gives "Resource not accessible by integration" here.
       - name: Stats card (dark)
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: stats
           options: username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&hide_border=true&theme=github_dark
           path: profile/stats-dark.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
 
       - name: Stats card (light)
         uses: readme-tools/github-readme-stats-action@v1
@@ -38,14 +40,14 @@ jobs:
           card: stats
           options: username=${{ github.repository_owner }}&show_icons=true&include_all_commits=true&hide_border=true&theme=default
           path: profile/stats-light.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
 
       # ---------- Top languages (dark + light) ----------
       - name: Top languages (dark)
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: top-langs
-          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&hide_border=true&theme=github_dark
+          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&hide=cython&hide_border=true&theme=github_dark
           path: profile/top-langs-dark.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -53,7 +55,7 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: top-langs
-          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&hide_border=true&theme=default
+          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&hide=cython&hide_border=true&theme=default
           path: profile/top-langs-light.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
